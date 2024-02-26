@@ -34,12 +34,10 @@ namespace StarterAssets
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     _animator.SetBool("KickLeft", true);
-                    invincible = true;
                 }
                 else
                 {
                     _animator.SetBool("Kick", true);
-                    invincible = true;
                 }
             }
             _input.kick = false;
