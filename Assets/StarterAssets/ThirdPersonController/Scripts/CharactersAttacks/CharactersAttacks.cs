@@ -30,11 +30,14 @@ namespace StarterAssets
 
             if (_input.kick)
             {
-                _animator.SetBool("Kick", true);
-            }
-            else if (_input.kick && Input.GetKey(KeyCode.LeftShift))
-            {
-                _animator.SetBool("KickLeft", true);
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    _animator.SetBool("KickLeft", true);
+                }
+                else
+                {
+                    _animator.SetBool("Kick", true);
+                }
             }
             _input.kick = false;
         }
