@@ -28,4 +28,8 @@ public class DragonHealth : MonoBehaviour
             animator.SetTrigger("damage");
         }
     }
+    public void AddLife(int recover)
+    {
+        dh += recover;
+    }
 }

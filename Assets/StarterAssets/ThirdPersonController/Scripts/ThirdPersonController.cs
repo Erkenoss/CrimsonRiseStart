@@ -144,7 +144,7 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             //Init charactersAttacks class
-            _charactersAttacks = new CharactersAttacks(_animator, _input);
+            _charactersAttacks = GetComponent<CharactersAttacks>();
 
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
