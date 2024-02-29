@@ -411,8 +411,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427eef40a6843ca409021e7786156076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &65932183
-SphereCollider:
+  charactersAttacks: {fileID: 0}
+  animator: {fileID: 65932174}
+  attackState: {fileID: 0}
+  isAttack: 0
+--- !u!136 &65932182
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -427,11 +431,13 @@ SphereCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 2.65, z: 3.39}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 6
+  m_Direction: 2
+  m_Center: {x: 0, y: 2.62, z: 1.68}
 --- !u!1 &94620577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,7 +1720,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1798,7 +1804,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2011,6 +2017,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0271df749728104eac22c3d897fd8ce, type: 3}
+--- !u!1 &753262958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 193072, guid: edd34a89cfe571f4ca766dcca2459bbe,
+    type: 3}
+  m_PrefabInstance: {fileID: 825744903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &753262960
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753262958}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 88.73, y: 9, z: 78.7}
+  m_Center: {x: -60.23, y: 0, z: 0}
 --- !u!1 &774152671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,7 +3002,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 193776, guid: edd34a89cfe571f4ca766dcca2459bbe,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 65932183}
+      addedObject: {fileID: 65932182}
+    - targetCorrespondingSourceObject: {fileID: 193072, guid: edd34a89cfe571f4ca766dcca2459bbe,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 753262960}
   m_SourcePrefab: {fileID: 100100000, guid: edd34a89cfe571f4ca766dcca2459bbe, type: 3}
 --- !u!1 &874605735
 GameObject:
@@ -5410,11 +5447,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1762682280}
+      addedObject: {fileID: 1762682295}
     - targetCorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1762682290}
+      addedObject: {fileID: 1762682300}
     - targetCorrespondingSourceObject: {fileID: 8015367010251096834, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       insertIndex: -1
@@ -5524,6 +5561,7 @@ MonoBehaviour:
   curHealth: 0
   maxHealth: 100
   healthBar: {fileID: 1255905399}
+  testDamage: 0
 --- !u!114 &1762682274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5544,7 +5582,7 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
---- !u!114 &1762682280
+--- !u!114 &1762682295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5556,7 +5594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42d1b633b5e7094e804e8dac41d105a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &1762682290
+  _health: {fileID: 1762682269}
+  isAttacking: 0
+  dragonDamage: {fileID: 65932180}
+--- !u!136 &1762682300
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5571,14 +5612,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.3
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &1764214107
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,13 +9,17 @@ public class CharactersAttacks : MonoBehaviour
     private int _animIDKick;
     private int _animaIDKickLeft;
     public Health _health;
+    public bool isAttacking;
+    public DragonDamage dragonDamage;
 
     private void Awake()
     {
+        dragonDamage = GetComponent<DragonDamage>();
         _animator = GetComponent<Animator>();
         _input = GetComponent<StarterAssets.StarterAssetsInputs>();
         _health = GetComponent<Health>();
     }
+
 
     public void SetAnimatorAndInput(Animator animator, StarterAssets.StarterAssetsInputs input)
     {
@@ -30,6 +34,7 @@ public class CharactersAttacks : MonoBehaviour
 
         if (_input.kick)
         {
+            isAttacking = true;
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 _animator.SetBool("KickLeft", true);
@@ -46,9 +51,15 @@ public class CharactersAttacks : MonoBehaviour
     {
         if (other.tag == "Dragon")
         {
-            transform.parent = other.transform;
-            other.GetComponent<DragonHealth>().TakeDamage(20);
+            if (isAttacking)
+            {
+                transform.parent = other.transform;
+                other.GetComponent<DragonHealth>().TakeDamage(20);
+            }
         }
     }
-
+    private void OnTriggerExit(Collider other)
+    {
+        isAttacking = false;
+    }
 }
