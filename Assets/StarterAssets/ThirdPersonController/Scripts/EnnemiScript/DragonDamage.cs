@@ -3,25 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 public class DragonDamage : MonoBehaviour
 {
-    public CharactersAttacks charactersAttacks;
     public Animator animator;
-    public AttackState attackState;
-    public bool isAttack;
+    public bool canDealDamage;
 
     private void Awake ()
     {
-        charactersAttacks = GetComponent<CharactersAttacks>();
+        canDealDamage = false;
         animator = GetComponent<Animator>();
-        attackState = animator.GetBehaviour<AttackState>();
     }
+
+    private void FixedUpdate()
+    {
+        canDealDamage = animator.GetBool("isAttacking");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (animator.GetBool("isAttacking") == true)
+            if (canDealDamage)
             {
                 other.GetComponent<Health>().DamagePlayer(10);
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        canDealDamage = false;
     }
 }
