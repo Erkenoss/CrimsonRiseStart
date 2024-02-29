@@ -8,17 +8,25 @@ public class Health : MonoBehaviour
     public int curHealth = 0;
     public int maxHealth = 100;
     public HealthBar healthBar;
-    public bool testDamage;
+    public Animator animator;
     void Start()
     {
-        testDamage = false;
         curHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
     public void DamagePlayer(int damage)
     {
         curHealth -= damage;
         healthBar.SetHealth(curHealth);
-        testDamage = true;
+        if (curHealth <= 0)
+        {
+            animator.SetTrigger("Die");
+            GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            animator.SetTrigger("Damage");
+        }
     }
     public void AddLife(int recover)
     {
