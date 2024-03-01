@@ -23,7 +23,7 @@ public class DragonDamage : MonoBehaviour
         {
             if (canDealDamage)
             {
-                other.GetComponent<Health>().DamagePlayer(10);
+                other.GetComponent<Health>().DamagePlayer(20);
             }
         }
     }

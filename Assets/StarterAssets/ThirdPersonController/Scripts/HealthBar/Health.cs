@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     public int maxHealth = 100;
     public HealthBar healthBar;
     public Animator animator;
+    public GameOverScreen gameOverScreen;
+
     void Start()
     {
         curHealth = maxHealth;
@@ -21,7 +23,7 @@ public class Health : MonoBehaviour
         if (curHealth <= 0)
         {
             animator.SetTrigger("Die");
-            GetComponent<Collider>().enabled = false;
+            GameOver();
         }
         else
         {
@@ -32,5 +34,10 @@ public class Health : MonoBehaviour
     {
         curHealth += recover;
         healthBar.SetHealth(curHealth);
+    }
+
+    public void GameOver()
+    {
+        gameOverScreen.Setup();
     }
 }
