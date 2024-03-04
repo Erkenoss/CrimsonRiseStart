@@ -4,65 +4,57 @@ using UnityEngine;
 public class DragonDamage : MonoBehaviour
 {
     public Animator animator;
-    public bool canDealDamage;
-    public List<Collider> RagdollParts = new List<Collider>();
+    public float damageTimer = 1.30f;
+    public float attackRange = 2f;
 
     private void Awake ()
     {
-        canDealDamage = false;
         animator = GetComponent<Animator>();
-        setRagdollParts();
     }
-
-    private void setRagdollParts()
+    private void Update()
     {
-        Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>();
-
-        foreach(Collider c in colliders)
+        if (damageTimer > 0)
         {
-            c.isTrigger = true;
-            RagdollParts.Add(c);
+            damageTimer -= Time.deltaTime;
         }
     }
-
-    private void FixedUpdate()
+    private void OnTriggerStay(Collider other)
     {
-        canDealDamage = animator.GetBool("isAttacking");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (IsRagdollPartCollidingWithPlayer(RagdollParts))
+        if (damageTimer <= 0)
         {
-            if (other.gameObject.tag == "Player")
+            if (IsTargetInRange())
             {
-                if (canDealDamage)
-                {
-                    other.gameObject.GetComponent<Health>().DamagePlayer(20);
-                }
+                other.GetComponent<Health>().DamagePlayer(5);
+                damageTimer = 1.30f;
+                Invoke(nameof(ResetCooldown), damageTimer);
             }
         }
     }
-
-    private bool IsRagdollPartCollidingWithPlayer(List<Collider> ragdollParts)
+    private void ResetCooldown()
     {
-        foreach (Collider ragdollPart in ragdollParts)
-        {
-            Collider[] playerColliders = GameObject.FindGameObjectWithTag("Player").GetComponents<Collider>();
-
-            foreach (Collider playerCollider in playerColliders)
-            {
-                if (ragdollPart.bounds.Intersects(playerCollider.bounds))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
+        damageTimer = 0;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        canDealDamage = false;
+        damageTimer = 0;
+    }
+
+
+    // private void OnTriggerExit(Collider other)
+    // {
+
+    // }
+
+    private bool IsTargetInRange()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            Transform player = playerObject.transform;
+            float distance = Vector3.Distance(transform.position, player.position);
+            return distance <= attackRange;
+        }
+        return false;
     }
 }
