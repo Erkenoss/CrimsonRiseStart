@@ -11,6 +11,11 @@ public class GameOverScreen : MonoBehaviour
         gameObject.SetActive(true);
         StartCoroutine("Wait");
     }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1);
+        Time.timeScale = 0;
+    }
     public void RestartButton()
     {
         SceneManager.LoadScene("Environment");
@@ -18,11 +23,5 @@ public class GameOverScreen : MonoBehaviour
     public void QuitButton()
     {
         SceneManager.LoadScene("Main menu");
-    }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1);
-        Time.timeScale = 0;
     }
 }

@@ -55,6 +55,7 @@ namespace StarterAssets
 		{
 			InteractInput(value.isPressed);
 		}
+
 #endif
 
 

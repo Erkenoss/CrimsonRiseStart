@@ -89,6 +89,9 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
+        //Empty gameobject for desable or enablde inventory
+        public GameObject inventoryObject;
+
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
@@ -166,6 +169,7 @@ namespace StarterAssets
             //Call new methodes
             _charactersAttacks.HandleKick();
             MouseEvent();
+
 
             JumpAndGravity();
             GroundedCheck();
