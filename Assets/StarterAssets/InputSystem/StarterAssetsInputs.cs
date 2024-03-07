@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool kick;
+		public bool interact;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -48,6 +49,11 @@ namespace StarterAssets
 		public void OnKick(InputValue value)
 		{
 			KickInput(value.isPressed);
+		}
+
+		public void OnInteract(InputValue value)
+		{
+			InteractInput(value.isPressed);
 		}
 #endif
 
@@ -85,6 +91,10 @@ namespace StarterAssets
 		private void KickInput(bool newKickState)
 		{
 			kick = newKickState;
+		}
+		private void InteractInput(bool newInteractState)
+		{
+			interact = newInteractState;
 		}
 	}
 

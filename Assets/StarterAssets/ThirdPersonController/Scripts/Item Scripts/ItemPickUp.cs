@@ -7,7 +7,6 @@ public class ItemPickUp : MonoBehaviour
 {
     public float PickUpRadius = 1f;
     public InventoryItemData ItemData;
-
     private SphereCollider myCollider;
 
     private void Awake()

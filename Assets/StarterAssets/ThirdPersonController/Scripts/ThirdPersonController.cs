@@ -302,20 +302,6 @@ namespace StarterAssets
             }
         }
 
-        // // start methode Kick
-        // private void Kick()
-        // {
-        //     //define kick to false
-        //     _animator.SetBool("Kick", false);
-        //     //check input
-        //     if (_input.kick)
-        //     {
-        //         //Set animation
-        //         _animator.SetBool("Kick", true);
-        //     }
-        //     _input.kick = false;
-        // }
-
         private void JumpAndGravity()
         {
             if (Grounded)
