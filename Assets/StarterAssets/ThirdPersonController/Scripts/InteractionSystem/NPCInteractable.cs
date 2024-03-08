@@ -28,7 +28,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 
     private IEnumerator DisableBubble()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(15f);
         chatBubble.SetActive(false);
     }
 

@@ -9,7 +9,8 @@ TagManager:
   - Dragon
   - Inventory
   - Enemy
-  - Legs
+  - Ethy
+  - Marco
   layers:
   - Default
   - TransparentFX
