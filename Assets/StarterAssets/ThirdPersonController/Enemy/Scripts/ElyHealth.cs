@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class ElyHealth : MonoBehaviour
 {
-    public int dh;  //the health of the Dragon
+    public int eh;  //the health of the Dragon
     public Animator animator;
 
 
     void Start()
     {
-        dh = 100;
+        eh = 100;
     }
 
     public void TakeDamage(int dmgs)
     {
-        dh -= dmgs;
-        if (dh <= 0)
+        eh -= dmgs;
+        if (eh <= 0)
         {
             //Animation death
             animator.SetTrigger("die");
@@ -30,6 +30,6 @@ public class ElyHealth : MonoBehaviour
     }
     public void AddLife(int recover)
     {
-        dh += recover;
+        eh += recover;
     }
 }

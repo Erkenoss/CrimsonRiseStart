@@ -6,22 +6,14 @@ public class CharactersAttacks : MonoBehaviour
 {
     private Animator _animator;
     private StarterAssets.StarterAssetsInputs _input;
-    private int _animIDKick;
-    private int _animaIDKickLeft;
-    public Health _health;
     public bool isAttacking;
-    public DragonDamage dragonDamage;
-
     private void Awake()
     {
-        dragonDamage = GetComponent<DragonDamage>();
         _animator = GetComponent<Animator>();
         _input = GetComponent<StarterAssets.StarterAssetsInputs>();
-        _health = GetComponent<Health>();
     }
 
-
-    public void SetAnimatorAndInput(Animator animator, StarterAssets.StarterAssetsInputs input)
+    public void SetAnimatorAndInput(Animator animator, StarterAssets.StarterAssetsInputs input) //Constructor
     {
         _animator = animator;
         _input = input;
@@ -49,12 +41,11 @@ public class CharactersAttacks : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Dragon")
+        if (other.tag == "Enemy")
         {
             if (isAttacking)
             {
-                transform.parent = other.transform;
-                other.GetComponent<DragonHealth>().TakeDamage(20);
+                other.GetComponent<ElyHealth>().TakeDamage(20);
             }
         }
     }
