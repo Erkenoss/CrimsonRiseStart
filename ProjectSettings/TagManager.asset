@@ -8,6 +8,7 @@ TagManager:
   - WayPoints
   - Dragon
   - Inventory
+  - Enemy
   layers:
   - Default
   - TransparentFX
