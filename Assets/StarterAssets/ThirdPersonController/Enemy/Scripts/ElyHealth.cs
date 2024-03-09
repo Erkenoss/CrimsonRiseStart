@@ -11,6 +11,7 @@ public class ElyHealth : MonoBehaviour
     void Start()
     {
         eh = 100;
+
     }
 
     public void TakeDamage(int dmgs)
@@ -20,6 +21,7 @@ public class ElyHealth : MonoBehaviour
         {
             //Animation death
             animator.SetTrigger("die");
+            StartCoroutine(Destroy());
             GetComponent<Collider>().enabled  = false;
         }
         else
@@ -31,5 +33,11 @@ public class ElyHealth : MonoBehaviour
     public void AddLife(int recover)
     {
         eh += recover;
+    }
+
+    private IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(10f);
+        Destroy(gameObject);
     }
 }
