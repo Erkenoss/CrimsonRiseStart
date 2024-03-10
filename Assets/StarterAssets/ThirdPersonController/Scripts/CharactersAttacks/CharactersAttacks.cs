@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class CharactersAttacks : MonoBehaviour
 {
-    public StarterAssets.ThirdPersonController thirdPersonController;
+    public List<Collider> characterCollider = new List<Collider>();
+
     private void Awake()
     {
-        thirdPersonController = GetComponent<StarterAssets.ThirdPersonController>();
+        SetCollider();
+    }
+
+    private void SetCollider ()
+    {
+        Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>();
+
+        foreach(Collider col in colliders)
+        {
+            if (col.gameObject != this.gameObject)
+            {
+                col.isTrigger = true;
+                characterCollider.Add(col);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
-            if (thirdPersonController.checkAttack)
-            {
-                other.GetComponent<ElyHealth>().TakeDamage(20);
-            }
+            other.GetComponent<ElyHealth>().TakeDamage(20);
         }
     }
 }

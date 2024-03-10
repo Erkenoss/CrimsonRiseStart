@@ -89,7 +89,6 @@ namespace StarterAssets
         //handle the cd for kicking. bool for check if the player attack
         public float kickCooldown;
         private float animationKick = 1.0f;
-        public bool checkAttack;
 
         // player
         public float _speed;
