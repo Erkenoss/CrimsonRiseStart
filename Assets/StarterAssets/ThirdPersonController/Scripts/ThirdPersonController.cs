@@ -81,8 +81,18 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
 
+
+        //for Manage speed when player kick attack
+        public float speedCooldown = 0.3f;
+        public float cooldownTimerSpeed;
+
+        //handle the cd for kicking. bool for check if the player attack
+        public float kickCooldown;
+        private float animationKick = 1.0f;
+        public bool checkAttack;
+
         // player
-        private float _speed;
+        public float _speed;
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
@@ -114,7 +124,6 @@ namespace StarterAssets
         private CharactersAttacks _charactersAttacks;
 
         private const float _threshold = 0.01f;
-
         private bool _hasAnimator;
 
         private bool IsCurrentDeviceMouse
@@ -166,10 +175,9 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            //Call new methodes
-            _charactersAttacks.HandleKick();
+            //Call new methode
+            Kick();
             MouseEvent();
-
 
             JumpAndGravity();
             GroundedCheck();
@@ -421,6 +429,61 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            }
+        }
+
+        private void Kick ()
+        {
+            _animator.SetBool("Kick", false);
+            _animator.SetBool("KickLeft", false);
+            if (_input.kick && kickCooldown == 0)
+            {
+                MoveSpeed = 1.5f;
+                SprintSpeed = 1.5f;
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    _animator.SetBool("KickLeft", true);
+                }
+                else
+                {
+                    _animator.SetBool("Kick", true);
+                }
+                cooldownTimerSpeed = speedCooldown;
+                kickCooldown = animationKick;
+            }
+            CooldownSpeed();
+            KickCd();
+            _input.kick = false;
+        }
+
+        private void KickCd()
+        {
+            if (kickCooldown > 0)
+            {
+                kickCooldown -= Time.deltaTime;
+            }
+            if (kickCooldown < 0)
+            {
+                kickCooldown = 0;
+            }
+        }
+
+        //Manage Speed after kick
+        private void CooldownSpeed ()
+        {
+            if (cooldownTimerSpeed == 0)
+            {
+                MoveSpeed = 2.0f;
+                SprintSpeed = 5.335f;
+            }
+            if (cooldownTimerSpeed > 0)
+            {
+                cooldownTimerSpeed -= Time.deltaTime;
+            }
+            if (cooldownTimerSpeed < 0)
+            {
+                cooldownTimerSpeed = 0;
             }
         }
 
