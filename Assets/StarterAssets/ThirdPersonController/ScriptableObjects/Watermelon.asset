@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Watermelon
   m_EditorClassIdentifier: 
   ID: 0
-  DisplayName: Test Item 1
+  DisplayName: Watermelon
   Description: This is a test item
   Icon: {fileID: 357961525, guid: e9f0bca431c40654e8ff966cbdbcbc50, type: 3}
   MaxStackSize: 1

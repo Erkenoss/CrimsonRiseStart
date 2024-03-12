@@ -17,10 +17,10 @@ namespace StarterAssets
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        public float MoveSpeed = 2.5f;
 
         [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 5.335f;
+        public float SprintSpeed = 5.835f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -81,7 +81,6 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
 
-
         //for Manage speed when player kick attack
         public float speedCooldown = 0.3f;
         public float cooldownTimerSpeed;
@@ -89,6 +88,7 @@ namespace StarterAssets
         //handle the cd for kicking. bool for check if the player attack
         public float kickCooldown;
         private float animationKick = 1.0f;
+        public bool isSitting = true;
 
         // player
         public float _speed;
@@ -111,7 +111,6 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
-        private int _animIDKick;    //implemented kick animation
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -154,8 +153,10 @@ namespace StarterAssets
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
+
             //Init charactersAttacks class
             _charactersAttacks = GetComponent<CharactersAttacks>();
+            _animator.SetBool("Sitting", false);
 
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
@@ -177,6 +178,7 @@ namespace StarterAssets
             //Call new methode
             Kick();
             MouseEvent();
+            GetUp();
 
             JumpAndGravity();
             GroundedCheck();
@@ -195,7 +197,6 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-            _animIDKick = Animator.StringToHash("Kick");
         }
 
         private void GroundedCheck()
@@ -431,15 +432,18 @@ namespace StarterAssets
             }
         }
 
+        //Handle the kick action
         private void Kick ()
         {
             _animator.SetBool("Kick", false);
             _animator.SetBool("KickLeft", false);
             if (_input.kick && kickCooldown == 0)
             {
+                //We don't want have a slide character
                 MoveSpeed = 1.5f;
                 SprintSpeed = 1.5f;
 
+                //Set of our animation
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     _animator.SetBool("KickLeft", true);
@@ -448,6 +452,8 @@ namespace StarterAssets
                 {
                     _animator.SetBool("Kick", true);
                 }
+
+                //Initialize cooldown
                 cooldownTimerSpeed = speedCooldown;
                 kickCooldown = animationKick;
             }
@@ -456,6 +462,7 @@ namespace StarterAssets
             _input.kick = false;
         }
 
+        //Cooldown for the different Kick
         private void KickCd()
         {
             if (kickCooldown > 0)
@@ -473,8 +480,8 @@ namespace StarterAssets
         {
             if (cooldownTimerSpeed == 0)
             {
-                MoveSpeed = 2.0f;
-                SprintSpeed = 5.335f;
+                MoveSpeed = 2.5f;
+                SprintSpeed = 5.835f;
             }
             if (cooldownTimerSpeed > 0)
             {
@@ -486,6 +493,7 @@ namespace StarterAssets
             }
         }
 
+        //handle the visibility of our mouse and the possibility or not to turn our camera
         private void MouseEvent()
         {
             if (Input.GetKeyDown(KeyCode.LeftAlt))
@@ -497,6 +505,14 @@ namespace StarterAssets
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                 }
+            }
+        }
+
+        private void GetUp()
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                _animator.SetBool("Sitting", true);
             }
         }
     }

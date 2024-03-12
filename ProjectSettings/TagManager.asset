@@ -11,6 +11,11 @@ TagManager:
   - Enemy
   - Ethy
   - Marco
+  - Legs
+  - Screen
+  - Screen2
+  - Can
+  - StartText
   layers:
   - Default
   - TransparentFX

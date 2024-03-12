@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tomato
   m_EditorClassIdentifier: 
   ID: 0
-  DisplayName: Test Item 2
+  DisplayName: Tomato
   Description: This is another test item
   Icon: {fileID: -795927739, guid: e9f0bca431c40654e8ff966cbdbcbc50, type: 3}
   MaxStackSize: 5
