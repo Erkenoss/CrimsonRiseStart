@@ -3,25 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameOverScreen : MonoBehaviour
 {
+    public AudioSource src;
+    public AudioClip sfx1, sfx2;
+
     public void Setup()
     {
         gameObject.SetActive(true);
-        StartCoroutine("Wait");
-    }
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1);
         Time.timeScale = 0;
     }
     public void RestartButton()
     {
-        SceneManager.LoadScene("Environment");
+        StartCoroutine(LoadScene());
     }
     public void QuitButton()
     {
-        SceneManager.LoadScene("Main menu");
+        SceneManager.LoadScene(0);
+    }
+
+    private IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadSceneAsync(1);
+    }
+    public void ButtonRestart()
+    {
+        src.clip = sfx1;
+        src.Play();
+    }
+
+    public void ButtonQuit()
+    {
+        src.clip = sfx2;
+        src.Play();
     }
 }

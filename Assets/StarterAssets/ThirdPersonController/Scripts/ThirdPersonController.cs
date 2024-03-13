@@ -98,8 +98,9 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
-        //Empty gameobject for desable or enablde inventory
+        //Empty gameobject for desable or enabled inventory or PauseMenu
         public GameObject inventoryObject;
+        public GameObject pauseMenu;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -179,6 +180,7 @@ namespace StarterAssets
             Kick();
             MouseEvent();
             GetUp();
+            GamePause();
 
             JumpAndGravity();
             GroundedCheck();
@@ -513,6 +515,14 @@ namespace StarterAssets
             if (Input.GetKeyDown(KeyCode.X))
             {
                 _animator.SetBool("Sitting", true);
+            }
+        }
+
+        private void GamePause()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseMenu.SetActive(!pauseMenu.activeSelf);
             }
         }
     }
