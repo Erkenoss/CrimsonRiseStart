@@ -8,7 +8,7 @@ public class VendingInteractable : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        can = GameObject.FindGameObjectWithTag("Can");
+        can = GameObject.FindGameObjectWithTag("Slot 2");
     }
 
     private void ToggleVending()
