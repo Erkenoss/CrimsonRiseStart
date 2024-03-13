@@ -17,7 +17,7 @@ public class ChatBubbleMarco : MonoBehaviour
     }
 
     private void Start() {
-        Setup("Could you help me with that person?!");
+        Setup("Could you help me with the guys upstair?!");
     }
     private void Setup(string text)
     {
