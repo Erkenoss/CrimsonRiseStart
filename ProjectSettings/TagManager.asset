@@ -14,8 +14,10 @@ TagManager:
   - Legs
   - Screen
   - Screen2
-  - Can
   - StartText
+  - Slot
+  - Slot 1
+  - Slot 2
   layers:
   - Default
   - TransparentFX
