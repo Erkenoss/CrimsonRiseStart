@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ChaseState : StateMachineBehaviour
+public class ChasingDownState : StateMachineBehaviour
 {
-
     NavMeshAgent agent;
     Transform player;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -13,26 +12,26 @@ public class ChaseState : StateMachineBehaviour
     {
         agent = animator.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        agent.speed = 0.3f;
+        agent.speed = 0.2f;
     }
 
-    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(player.position);
         animator.transform.LookAt(player);
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance > 12f)
+        if (distance > 8f)
         {
-            animator.SetBool("isChasing", false);
+            animator.SetBool("isChasingDown", false);
         }
-        if (distance < 4f)
+        if (distance < 1.5f)
         {
-            animator.SetBool("isChasingDown", true);
+            animator.SetBool("isAttacking", true);
         }
     }
 
-    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(animator.transform.position);

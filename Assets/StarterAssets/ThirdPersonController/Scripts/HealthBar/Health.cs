@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
 
     public int curHealth = 0;
-    public int maxHealth = 100;
+    public int maxHealth = 1000;
     public HealthBar healthBar;
     public Animator animator;
     public GameOverScreen gameOverScreen;

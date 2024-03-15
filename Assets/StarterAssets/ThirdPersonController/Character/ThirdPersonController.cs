@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -120,7 +121,6 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-        private CharactersAttacks _charactersAttacks;
 
         private const float _threshold = 0.01f;
         private bool _hasAnimator;
@@ -155,7 +155,6 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
 
             //Init charactersAttacks class
-            _charactersAttacks = GetComponent<CharactersAttacks>();
             _animator.SetBool("Sitting", false);
 
 #if ENABLE_INPUT_SYSTEM
@@ -169,6 +168,7 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            SetRagdollParts();
         }
 
         private void Update()
@@ -434,17 +434,18 @@ namespace StarterAssets
         }
 
         //Handle the kick action
+
         private void Kick ()
         {
             _animator.SetBool("Kick", false);
             _animator.SetBool("KickLeft", false);
             if (_input.kick && kickCooldown == 0)
             {
-                //We don't want have a slide character
+                //We don't want have a slide character during animation
                 MoveSpeed = 1.5f;
                 SprintSpeed = 1.5f;
 
-                //Set of our animation
+                //Set animation
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     _animator.SetBool("KickLeft", true);
@@ -519,10 +520,93 @@ namespace StarterAssets
 
         private void GamePause()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !GameObject.Find("CanvasStart"))
             {
                 pauseMenu.SetActive(!pauseMenu.activeSelf);
             }
         }
+
+
+        //Here, we have the code for manage colliders, ragdoll and the collision
+        //Later it will update in an other script
+        public List<Collider> RagdollParts = new List<Collider>();
+        public List<Collider> CollidingParts = new List<Collider>();
+        public List<Rigidbody> Kinematic = new List<Rigidbody>();
+
+        //Function for take the differents collider in our character
+        private void SetRagdollParts()
+        {
+            //Set all collider to isTrigger
+            Collider[] colliders = this.gameObject.GetComponentsInChildren<Collider>();
+
+            //Set all rigidbodyisKinematic
+            Rigidbody[] bodies = this.gameObject.GetComponentsInChildren<Rigidbody>();
+
+            foreach(Collider col in colliders)
+            {
+                if (col.gameObject != this.gameObject)
+                {
+                    col.isTrigger = true;
+                    RagdollParts.Add(col);
+                }
+            }
+            foreach(Rigidbody body in bodies)
+            {
+                if (body.gameObject != this.gameObject)
+                {
+                    body.isKinematic = true;
+                    Kinematic.Add(body);
+                }
+            }
+        }
+
+        //Function for turn on ragdoll, use when the player die
+        private void TurnOnRagdoll()
+        {
+            //Enable the possibility to move and acces to the character controller
+            CharacterController characterController;
+            characterController = GetComponent<CharacterController>();
+            characterController.enabled = false;
+            _animator.enabled = false;
+
+            //Disable collider trigger
+            foreach (Collider col in RagdollParts)
+            {
+                col.isTrigger = false;
+            }
+            //Disable isKinematic rigidbody
+            foreach (Rigidbody body in Kinematic)
+            {
+                body.isKinematic = false;
+            }
+        }
+
+        // private void OnTriggerEnter(Collider col)
+        // {
+        //     //Check if we don't touch a part of our own body
+        //     if (RagdollParts.Contains(col))
+        //     {
+        //         return;
+        //     }
+        //     if (!CollidingParts.Contains(col))
+        //     {
+        //         CollidingParts.Add(col);
+        //     }
+        // }
+
+        // private void OnTriggerExit(Collider col)
+        // {
+        //     if (CollidingParts.Contains(col))
+        //     {
+        //         CollidingParts.Remove(col);
+        //     }
+        // }
+
+        //Récupérer les jambes
+
+        //Initialiser un rayon sur les jambes
+
+        //Si le rayons touche un collider du tag enemy
+            //Appliquer les dégats
     }
 }

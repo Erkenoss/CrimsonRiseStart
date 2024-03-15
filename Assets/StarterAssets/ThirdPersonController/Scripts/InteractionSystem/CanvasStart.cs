@@ -8,7 +8,7 @@ public class CanvasStart : MonoBehaviour
 
     public void Start()
     {
-        textEnter = GameObject.FindGameObjectWithTag("StartText");
+        textEnter = GameObject.Find("CanvasStart");
         textEnter.SetActive(true);
     }
 
@@ -16,7 +16,7 @@ public class CanvasStart : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            textEnter.SetActive(false);
+            Destroy(textEnter);
         }
     }
 }

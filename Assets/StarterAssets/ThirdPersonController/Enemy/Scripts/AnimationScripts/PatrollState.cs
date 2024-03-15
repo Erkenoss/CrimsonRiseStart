@@ -7,7 +7,7 @@ public class PatrollState : StateMachineBehaviour
     float timer;
     List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent agent;
-    float chaseRange = 8;
+    float chaseRange = 6f;
     Transform player;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -31,7 +31,7 @@ public class PatrollState : StateMachineBehaviour
             agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
         }
         timer += Time.deltaTime;
-        if (timer > 10)
+        if (timer > 8)
         {
             animator.SetBool("isPatrolling", false);
         }

@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DamageDealer : MonoBehaviour
+{
+    bool canDealDamage;
+    public float legLength;
+    public ElyHealth health;
+
+
+    void Start()
+    {
+        canDealDamage = true;
+    }
+
+    void Update()
+    {
+        if (canDealDamage)
+        {
+            RaycastHit hit;
+            int layerMask = 1 << 9;
+            if (Physics.Raycast(transform.position, -transform.up, out hit, legLength, layerMask))
+            {
+                DealDamage();
+            }
+        }
+    }
+
+    public void StartDealDamage()
+    {
+        canDealDamage = true;
+    }
+
+    public void EndDealDamage()
+    {
+        canDealDamage = false;
+    }
+
+    public void DealDamage()
+    {
+        health.TakeDamage(10);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position - transform.up * legLength);
+    }
+}
