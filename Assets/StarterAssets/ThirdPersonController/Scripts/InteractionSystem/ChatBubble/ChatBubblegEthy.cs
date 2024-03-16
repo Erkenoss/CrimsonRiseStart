@@ -16,13 +16,14 @@ public class ChatBubbleEthy : MonoBehaviour
         textMeshPro = transform.Find("Text").GetComponent<TextMeshPro>();
     }
 
-    private void Start() {
+    private void Start()
+    {
         Setup("Mistress? Awake...");
+        StartCoroutine(Next());
     }
     private void Setup(string text)
     {
         textMeshPro.SetText(text);
-        StartCoroutine(Next());
     }
 
     private IEnumerator Next()

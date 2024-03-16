@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using TMPro;
 
-public class ChatBubbleMarco : MonoBehaviour
-{
-    private SpriteRenderer backGroundSpriteRenderer;
-    private SpriteRenderer iconSpriteRenderer;
-    private TextMeshPro textMeshPro;
+// public class ChatBubbleMarco : MonoBehaviour
+// {
+//     private SpriteRenderer backGroundSpriteRenderer;
+//     private SpriteRenderer iconSpriteRenderer;
+//     private TextMeshPro textMeshPro;
 
-    private void Awake()
-    {
-        backGroundSpriteRenderer = transform.Find("Background").GetComponent<SpriteRenderer>();
-        iconSpriteRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
-        textMeshPro = transform.Find("Text").GetComponent<TextMeshPro>();
-    }
+//     private void Awake()
+//     {
+//         backGroundSpriteRenderer = transform.Find("Background").GetComponent<SpriteRenderer>();
+//         iconSpriteRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
+//         textMeshPro = transform.Find("Text").GetComponent<TextMeshPro>();
+//     }
 
-    private void Start() {
-        Setup("Could you help me with the guys upstair?!");
-    }
-    private void Setup(string text)
-    {
-        textMeshPro.SetText(text);
-    }
-}
+//     private void Start() {
+//         Setup("Could you help me with the guys upstair?!");
+//     }
+//     private void Setup(string text)
+//     {
+//         textMeshPro.SetText(text);
+//     }
+// }

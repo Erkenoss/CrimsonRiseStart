@@ -6,8 +6,8 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 {
 
     [SerializeField] public string interactText;
-    public GameObject chatBubble;
     private Animator animator;
+    public GameObject chatBubble;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 
     private IEnumerator DisableBubble()
     {
-        yield return new WaitForSeconds(12f);
+        yield return new WaitForSeconds(6f);
         chatBubble.SetActive(false);
     }
 

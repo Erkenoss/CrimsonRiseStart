@@ -5,16 +5,24 @@ using UnityEngine;
 public class VendingInteractable : MonoBehaviour, IInteractable
 {
     private GameObject can;
+    public Inventory inventory;
+    private bool isCan;
 
     private void Awake()
     {
         can = GameObject.FindGameObjectWithTag("Slot 2");
+        isCan = true;
     }
 
     private void ToggleVending()
     {
-        can.transform.parent = null;
-        can.transform.position = new Vector3(can.transform.position.x, 0.2f, 24f);
+        if (isCan)
+        {
+            inventory.slots[2] += 1;
+            inventory.UpdateText(2, inventory.slots[2].ToString());
+            Destroy(can);
+        }
+        isCan = false;
     }
 
     public void Interact(Transform interactorTransform)
