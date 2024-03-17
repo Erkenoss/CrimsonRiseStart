@@ -220,7 +220,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.31938222
+        functionName: StartDealDamageRight
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: abec2978811cf774a9f50b1b0a391a33,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5300396
+        functionName: EndDealDamageRight
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: abec2978811cf774a9f50b1b0a391a33,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

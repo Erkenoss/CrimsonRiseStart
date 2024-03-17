@@ -581,6 +581,27 @@ namespace StarterAssets
             }
         }
 
+
+        public GameObject leftLeg;
+        public GameObject rightLeg;
+        public void StartDealDamageLeft()
+        {
+            leftLeg.GetComponentInChildren<DamageDealerLeft>().StartDealDamageLeft();
+        }
+        public void EndDealDamageLeft()
+        {
+            leftLeg.GetComponentInChildren<DamageDealerLeft>().EndDealDamageLeft();
+        }
+        public void StartDealDamageRight()
+        {
+            rightLeg.GetComponentInChildren<DamageDealerRight>().StartDealDamageRight();
+        }
+        public void EndDealDamageRight()
+        {
+            rightLeg.GetComponentInChildren<DamageDealerRight>().EndDealDamageRight();
+        }
+
+
         // private void OnTriggerEnter(Collider col)
         // {
         //     //Check if we don't touch a part of our own body

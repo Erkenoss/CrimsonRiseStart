@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+public class DamageDealerLeft : MonoBehaviour
 {
     bool canDealDamage;
     public float legLength;
     public ElyHealth health;
-
-
-    void Start()
-    {
-        canDealDamage = true;
-    }
 
     void Update()
     {
@@ -27,12 +21,12 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
-    public void StartDealDamage()
+    public void StartDealDamageLeft()
     {
         canDealDamage = true;
     }
 
-    public void EndDealDamage()
+    public void EndDealDamageLeft()
     {
         canDealDamage = false;
     }
