@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class IdleState : StateMachineBehaviour
 {
     float timer;
     Transform player;
-
-    float chaseRange = 6f;
+    NavMeshAgent agent;
+    float aimRange = 6f;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = 0;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = animator.GetComponent<NavMeshAgent>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,9 +26,11 @@ public class IdleState : StateMachineBehaviour
             animator.SetBool("isPatrolling", true);
         }
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance < chaseRange)
+        if (distance < aimRange)
         {
-            animator.SetBool("isChasing", true);
+            animator.transform.LookAt(player);
+            agent.speed = 0.3f;
+            animator.SetBool("isAiming", true);
         }
     }
 

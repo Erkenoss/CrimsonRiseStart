@@ -6,7 +6,7 @@ public class DamageDealerRight : MonoBehaviour
 {
     bool canDealDamage;
     public float legLength;
-    public ElyHealth health;
+    public RobotLife health;
 
     void Update()
     {
@@ -16,6 +16,7 @@ public class DamageDealerRight : MonoBehaviour
             int layerMask = 1 << 9;
             if (Physics.Raycast(transform.position, -transform.up, out hit, legLength, layerMask))
             {
+                Debug.Log("Hit Robot!");
                 DealDamage();
             }
         }

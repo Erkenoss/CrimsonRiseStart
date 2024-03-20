@@ -581,7 +581,6 @@ namespace StarterAssets
             }
         }
 
-
         public GameObject leftLeg;
         public GameObject rightLeg;
         public void StartDealDamageLeft()
@@ -622,12 +621,5 @@ namespace StarterAssets
         //         CollidingParts.Remove(col);
         //     }
         // }
-
-        //Récupérer les jambes
-
-        //Initialiser un rayon sur les jambes
-
-        //Si le rayons touche un collider du tag enemy
-            //Appliquer les dégats
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElyHealth : MonoBehaviour
 {
-    public int eh;  //the health of the Dragon
+    public int eh;  //the ElyHealth
     public Animator animator;
     public Health playerHealth;
     public List<Collider> RagdollParts = new List<Collider>();
@@ -13,7 +13,7 @@ public class ElyHealth : MonoBehaviour
 
     void Start()
     {
-        eh = 1000;
+        eh = 100;
         animator = GetComponent<Animator>();
         SetRagdollParts();
     }
@@ -24,7 +24,6 @@ public class ElyHealth : MonoBehaviour
         if (eh <= 0)
         {
             //Animation death
-            animator.SetTrigger("die");
             TurnOnRagdoll();
             StartCoroutine(Destroy());
             GetComponent<Collider>().enabled  = false;

@@ -7,8 +7,9 @@ public class PatrollState : StateMachineBehaviour
     float timer;
     List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent agent;
-    float chaseRange = 6f;
+    float aimRange = 6f;
     Transform player;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -31,21 +32,23 @@ public class PatrollState : StateMachineBehaviour
             agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
         }
         timer += Time.deltaTime;
-        if (timer > 8)
+        if (timer > 6)
         {
             animator.SetBool("isPatrolling", false);
         }
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance < chaseRange)
+        if (distance < aimRange)
         {
-            animator.SetBool("isChasing", true);
+            animator.transform.LookAt(player);
+            agent.speed = 0.3f;
+            animator.SetBool("isAiming", true);
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-            agent.SetDestination(agent.transform.position);
+        agent.SetDestination(agent.transform.position);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
